@@ -4,11 +4,11 @@ from django.db import models
 # à compléter
 choicesNationality = ("FR", "France"), ("US", "USA"), ("UK", "United Kingdom")
 
-choicesType = ("tri", "trilogie"), ("cyc", "cycle"), ("sin","single")
+choicesType = ("tri", "trilogie"), ("cyc", "cycle"), ("sin", "single")
 
 stateUserBook = ("toRead", "à Lire"), ("abandoned", "abandonné"), ("pending", "en Attente"), ("onGoing", "en Cours")
 
-# ------------------------------  Models --------------------------------------
+# ------------------------------  Models  --------------------------------------
 
 
 class Author(models.Model):
@@ -81,7 +81,7 @@ class SerieBook(models.Model):
 
 
 class Profil(models.Model):
-    user = models.OneToOneField(User, blank=True, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     listGenres = list()
 
     class Meta:

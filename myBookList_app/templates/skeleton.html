@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/semantic.min.css'%}">
+
+
+    </head>
+    <body>
+        <nav class="ui container" style="margin-top: 5px">
+            <div class="ui menu">
+                <a class="item">Home</a>
+                <a class="item">Un autre item</a>
+
+                <div class="right item">
+                    <div class="ui transparent icon input">
+                        <input type="text" placeholder="Search...">
+                        <i class="search icon"></i>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        {% block content %}
+        {% endblock %}
+
+
+        <footer>
+
+        </footer>
+
+        <!-- JS -->
+        <script src="{% static 'js/jquery.js' %}"></script>
+        <script src="{% static 'js/semantic.min.js' %}"></script>
+
+    </body>
+</html>
