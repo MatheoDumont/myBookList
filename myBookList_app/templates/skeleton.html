@@ -13,17 +13,52 @@
     <body>
         <nav class="ui container" style="margin-top: 5px">
             <div class="ui menu">
-                <a class="item">Home</a>
-                <a class="item">Un autre item</a>
+                <a class="item">
+                    <i class="home icon"></i>
+                    Home
+                </a>
 
-                <div class="right item">
-                    <div class="ui transparent icon input">
-                        <input type="text" placeholder="Search...">
-                        <i class="search icon"></i>
+
+                <div class="right menu">
+                    <div class="item">
+                        <div class="ui transparent icon input">
+                            <input id="searchBar" type="text" placeholder="Search...">
+                            <i class="search icon"></i>
+                        </div>
                     </div>
+                    <a id="signOrLoginBtn" class="item">Sign or Log in</a>
                 </div>
             </div>
         </nav>
+
+        <!-- Modal Sign or Log in -->
+
+        <div id="signOrLoginModal" class="ui modal">
+            <i class="close icon"></i>
+            <div class="header">
+                Sign or Log in
+            </div>
+            <div class="content">
+                <div class="ui two column grid container">
+                    <div class="column">
+                        <form class="ui form" action="" method="POST">
+                            {% csrf_token %}
+                            {{ authForm }}
+                            <input class="ui button" type="submit" value="Se connecter"/>
+                        </form>
+                    </div>
+                    <div class="column">
+                        <form class="ui form" action="" method="POST">
+                            {% csrf_token %}
+                            {{ createForm }}
+                            <input class="ui button" type="submit" value="S'inscrire"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fin Modal Sign or Log in -->
 
         {% block content %}
         {% endblock %}
@@ -36,6 +71,7 @@
         <!-- JS -->
         <script src="{% static 'js/jquery.js' %}"></script>
         <script src="{% static 'js/semantic.min.js' %}"></script>
+        <script src="{% static 'js/templates/skeleton.js' %}"></script>
 
     </body>
 </html>
