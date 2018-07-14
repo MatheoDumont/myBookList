@@ -1,14 +1,16 @@
 from django.shortcuts import render
 from django.contrib.auth.forms import AuthenticationForm
-from myBookList_app.forms.CustomUserCreationForm import CustomUserCreationForm
+from django.views import View
+
+from myBookList_app.forms.inscriptionForms import CustomUserCreationForm
 
 
-def index(request):
+class Index(View):
+    template = 'index/index.html'
 
-    authform = AuthenticationForm()
-    creationUserForm = CustomUserCreationForm()
+    def get(self, request):
+        authform = AuthenticationForm()
 
-    return render(request, 'index/index.html', {
-        'authForm': authform,
-        'createForm': creationUserForm
-    })
+        return render(request, self.template, {
+            'authForm': authform,
+        })
