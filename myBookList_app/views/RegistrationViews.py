@@ -1,13 +1,14 @@
-from django.http import HttpResponseRedirect
+from pprint import pprint
+
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 
-from myBookList_app.forms.inscriptionForms import CustomUserCreationForm
+from myBookList_app.forms.registrationForms import CustomUserCreationForm
 
 
 class SignIn(View):
-    template = 'SignIn/index.html'
+    template = 'registration/sign-in.html'
 
     def get(self, request):
         form = CustomUserCreationForm()

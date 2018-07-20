@@ -1,0 +1,97 @@
+{% extends 'skeleton.html' %}
+{% load widget_tweaks %}
+
+{%  block content %}
+    <div class="ui four column grid container segment">
+        <div class="two column row">
+            <div class="column">
+                <form class="ui success warning error form" method="POST" action="{% url 'Registration sign-in' %}">
+
+                    {% csrf_token %}
+
+                    {% for field in form.visible_fields %}
+
+                        {% if form.is_bound %}
+
+                            {% if field.errors %}
+
+                                <div class="field error">
+
+                                    <div class="ui label">
+                                        {{ field.label_tag }}
+                                    </div>
+
+                                    {% render_field field class="ui input error" %}
+
+                                </div>
+
+                                <div class="ui tiny error message">
+                                        <ul class="list">
+                                            {% for error in field.errors %}
+                                                <li>{{ error }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+
+                            {% else %}
+
+                                <div class="field success">
+
+                                    <div class="ui label">
+                                        {{ field.label_tag }}
+                                    </div>
+
+                                    {% render_field field class="ui input success" %}
+                                </div>
+
+                            {% endif %}
+
+                        {% else %}
+
+                            <div class="field">
+
+                                <div class="ui label">
+                                    {{ field.label_tag }}
+                                </div>
+
+                                {% render_field field class="ui input" %}
+
+                            </div>
+
+                            {% if field.help_text %}
+                                {% if field != form.password1 %}
+
+                                    <div class="ui tiny warning message">
+                                        {{ field.help_text }}
+                                    </div>
+
+                                {% endif %}
+
+                            {% endif %}
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                    <input type="submit" value="S'inscrire" class="ui button">
+                </form>
+            </div>
+            <div class="column">
+                <div class="ui left aligned grid container" >
+                    <div class="ui warning message" style="margin-top: 20px">
+                        <div class="header">
+                            Mot de passe
+                        </div>
+                        <ul class="list">
+                            <li>Votre mot de passe ne peut pas trop ressembler à vos autres informations personnelles.</li>
+                            <li>Votre mot de passe doit contenir au minimum 8 caractères.</li>
+                            <li>Votre mot de passe ne peut pas être un mot de passe couramment utilisé.</li>
+                            <li>Votre mot de passe ne peut pas être entièrement numérique.</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

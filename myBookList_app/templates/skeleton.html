@@ -13,7 +13,7 @@
     <body>
         <nav class="ui container" style="margin-top: 5px">
             <div class="ui menu">
-                <a class="item">
+                <a class="item" href="{% url 'index' %}">
                     <i class="home icon"></i>
                     Home
                 </a>
@@ -26,45 +26,10 @@
                             <i class="search icon"></i>
                         </div>
                     </div>
-                    <a id="signOrLoginBtn" class="item">S'authentifier</a>
+                    <a class="item" href="{% url 'Registration login' %}">S'authentifier</a>
                 </div>
             </div>
         </nav>
-
-        <!-- Modal Sign or Log in -->
-
-        <div id="signOrLoginModal" class="ui modal">
-            <i class="close icon"></i>
-            <div class="header">
-                Sign or Log in
-            </div>
-            <div class="content">
-                <div class="ui four column center aligned grid container">
-                    <div class="two column row">
-                        <div class="column">
-                            <form class="ui form" action="" method="POST">
-                                {% csrf_token %}
-                                {{ authForm }}
-                                <input class="ui button" type="submit" value="Se connecter"/>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="ui horizontal divider">
-                        Ou
-                    </div>
-                    <div class="two column row">
-                        <div class="column">
-                            <div class="ui labeled icon button">
-                                <i class="signup icon"></i>
-                                <a href="{% url 'Inscription index' %}">S'inscrire</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Fin Modal Sign or Log in -->
 
         {% block content %}
         {% endblock %}

@@ -1,0 +1,35 @@
+
+{% extends 'skeleton.html' %}
+
+{%  block content %}
+    <div class="ui four column center aligned grid container segment">
+        <div class="two column row">
+            <div class="column">
+                <form class="ui form" method="POST" action="{% url 'Registration login' %}">
+                    {% csrf_token %}
+                    <div class="ui field">
+                        {{ form.username.label_tag }}
+                        {{ form.username }}
+                    </div>
+                    <div class="ui field">
+                        {{ form.password.label_tag }}
+                        {{ form.password }}
+                    </div>
+                    <input type="submit" value="Se connecter" class="ui button">
+                </form>
+            </div>
+        </div>
+        <div class="two column row">
+            <div class="column">
+                <div class="ui horizontal divider">OR</div>
+            </div>
+        </div>
+        <div class="tow column row">
+            <div class="column">
+                <a class="ui labeled icon button" type="button" href="{% url 'Registration sign-in' %}">S'inscrire
+                    <i class="icon edit outline"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

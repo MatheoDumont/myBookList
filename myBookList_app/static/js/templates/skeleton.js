@@ -4,10 +4,6 @@ $(document).ready(function () {
     $('#searchBar').focusin(onFocusInSearch);
     $('#searchBar').focusout(onFocusOutSearch);
 
-    // On attache la fonction pour la modal d'inscription ou connexion
-    $("#signOrLoginBtn").click(function () {
-            $('#signOrLoginModal').modal('show');
-    });
 });
 
 function onFocusInSearch()

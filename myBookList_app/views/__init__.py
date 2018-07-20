@@ -1,4 +1,4 @@
 from . import IndexViews
-from . import SignInViews
+from . import RegistrationViews
 
 
