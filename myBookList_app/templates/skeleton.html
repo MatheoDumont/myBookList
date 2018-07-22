@@ -13,20 +13,14 @@
     <body>
         <nav class="ui container" style="margin-top: 5px">
             <div class="ui menu">
-                <a class="item" href="{% url 'index' %}">
-                    <i class="home icon"></i>
-                    Home
-                </a>
+                <a class="item">Home</a>
+                <a class="item">Un autre item</a>
 
-
-                <div class="right menu">
-                    <div class="item">
-                        <div class="ui transparent icon input">
-                            <input id="searchBar" type="text" placeholder="Search...">
-                            <i class="search icon"></i>
-                        </div>
+                <div class="right item">
+                    <div class="ui transparent icon input">
+                        <input type="text" placeholder="Search...">
+                        <i class="search icon"></i>
                     </div>
-                    <a class="item" href="{% url 'Registration login' %}">S'authentifier</a>
                 </div>
             </div>
         </nav>
@@ -42,7 +36,6 @@
         <!-- JS -->
         <script src="{% static 'js/jquery.js' %}"></script>
         <script src="{% static 'js/semantic.min.js' %}"></script>
-        <script src="{% static 'js/templates/skeleton.js' %}"></script>
 
     </body>
 </html>
