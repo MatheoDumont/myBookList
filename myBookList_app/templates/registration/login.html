@@ -1,21 +1,70 @@
 
 {% extends 'skeleton.html' %}
+{% load widget_tweaks %}
 
 {%  block content %}
     <div class="ui four column center aligned grid container segment">
         <div class="two column row">
             <div class="column">
-                <form class="ui form" method="POST" action="{% url 'Registration login' %}">
+                <form class="ui success warning error form" method="POST" action="{% url 'Registration login' %}">
+
                     {% csrf_token %}
-                    <div class="ui field">
-                        {{ form.username.label_tag }}
-                        {{ form.username }}
-                    </div>
-                    <div class="ui field">
-                        {{ form.password.label_tag }}
-                        {{ form.password }}
-                    </div>
-                    <input type="submit" value="Se connecter" class="ui button">
+
+                    {% if form.non_field_errors %}
+
+                        <div class="ui medium warning message">
+                            {{ form.non_field_errors }}
+                        </div>
+
+                    {% endif %}
+
+                    {% for field in form.visible_fields %}
+
+                        {% if form.is_bound %}
+
+                            {% if field.errors %}
+
+                                <div class="field error">
+
+                                    <div class="ui label">
+                                        {{ field.label_tag }}
+                                    </div>
+
+                                    {% render_field field class="ui input error" %}
+
+                                </div>
+
+                            {% else %}
+
+                                <div class="field success">
+
+                                    <div class="ui label">
+                                        {{ field.label_tag }}
+                                    </div>
+
+                                    {% render_field field class="ui input success" %}
+
+                                </div>
+
+                             {% endif %}
+
+                        {% else %}
+
+                            <div class="field">
+
+                                <div class="ui label">
+                                    {{ field.label_tag }}
+                                </div>
+
+                                {% render_field field class="ui input" %}
+
+                            </div>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                    <input type="submit" value="Se connecter" class="ui blue submit button">
                 </form>
             </div>
         </div>
@@ -26,8 +75,9 @@
         </div>
         <div class="tow column row">
             <div class="column">
-                <a class="ui labeled icon button" type="button" href="{% url 'Registration sign-in' %}">S'inscrire
-                    <i class="icon edit outline"></i>
+                <a class="ui labeled icon positive button" href="{% url 'Registration sign-in' %}">
+                    <i class="edit icon"></i>
+                    S'inscrire
                 </a>
             </div>
         </div>

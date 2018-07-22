@@ -15,6 +15,14 @@
 
                             {% if field.errors %}
 
+                                <div class="ui tiny error message">
+                                        <ul class="list">
+                                            {% for error in field.errors %}
+                                                <li>{{ error }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                </div>
+
                                 <div class="field error">
 
                                     <div class="ui label">
@@ -24,14 +32,6 @@
                                     {% render_field field class="ui input error" %}
 
                                 </div>
-
-                                <div class="ui tiny error message">
-                                        <ul class="list">
-                                            {% for error in field.errors %}
-                                                <li>{{ error }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                    </div>
 
                             {% else %}
 
@@ -48,16 +48,6 @@
 
                         {% else %}
 
-                            <div class="field">
-
-                                <div class="ui label">
-                                    {{ field.label_tag }}
-                                </div>
-
-                                {% render_field field class="ui input" %}
-
-                            </div>
-
                             {% if field.help_text %}
                                 {% if field != form.password1 %}
 
@@ -69,18 +59,28 @@
 
                             {% endif %}
 
+                            <div class="field">
+
+                                <div class="ui label">
+                                    {{ field.label_tag }}
+                                </div>
+
+                                {% render_field field class="ui input" %}
+
+                            </div>
+
                         {% endif %}
 
                     {% endfor %}
 
-                    <input type="submit" value="S'inscrire" class="ui button">
+                    <input type="submit" value="S'inscrire" class="positive ui button">
                 </form>
             </div>
             <div class="column">
                 <div class="ui left aligned grid container" >
                     <div class="ui warning message" style="margin-top: 20px">
                         <div class="header">
-                            Mot de passe
+                            Votre mot de passe
                         </div>
                         <ul class="list">
                             <li>Votre mot de passe ne peut pas trop ressembler à vos autres informations personnelles.</li>
