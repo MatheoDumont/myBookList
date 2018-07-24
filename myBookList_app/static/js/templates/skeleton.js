@@ -4,6 +4,7 @@ $(document).ready(function () {
     $('#searchBar').focusin(onFocusInSearch);
     $('#searchBar').focusout(onFocusOutSearch);
 
+
 });
 
 function onFocusInSearch()
