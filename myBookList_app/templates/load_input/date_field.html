@@ -1,10 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% load widget_tweaks %}
+{% load load_input %}
+
+{% if form.is_bound %}
+
+    {% if field.errors %}
+
+        <div class="ui tiny error message">
+                <ul class="list">
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+        </div>
+
+        <div class="field error">
+
+            <div class="ui label">
+                {{ field.label_tag }}
+            </div>
+
+            <div class="ui calendar" id="{{ field.auto_id }}">
+                <div class="ui input left icon" >
+                    <i class="calendar icon"></i>
+                    {% render_field field  %}
+                </div>
+            </div>
+
+        </div>
+
+    {% else %}
+
+        <div class="field success">
+
+            <div class="ui label">
+                {{ field.label_tag }}
+            </div>
+
+            <div class="ui calendar" id="{{ field.auto_id }}">
+                <div class="ui input left icon" >
+                    <i class="calendar icon"></i>
+                    {% render_field field%}
+                </div>
+            </div>
+
+        </div>
+
+    {% endif %}
+
+    {% else %}
+
+    {% if field.help_text %}
+
+        <div class="ui tiny warning message">
+            {{ field.help_text }}
+        </div>
+
+    {% endif %}
+
+    <div class="field">
+
+        <div class="ui label">
+            {{ field.label_tag }}
+        </div>
+
+        <div class="ui calendar" id="{{ field.auto_id }}">
+            <div class="ui input left icon" >
+                <i class="calendar icon"></i>
+                {% render_field field %}
+            </div>
+        </div>
+
+    </div>
+
+{% endif %}

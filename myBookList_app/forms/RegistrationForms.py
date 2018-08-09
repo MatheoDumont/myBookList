@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class UniqueUserMail(forms.EmailField):
     def validate(self, value):
-        super(forms.EmailField,self).validate(value)
+        super(forms.EmailField, self).validate(value)
         if User.objects.filter(email=value).exists():
             raise forms.ValidationError("L'émail n'existe pas")
 

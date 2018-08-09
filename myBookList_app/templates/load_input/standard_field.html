@@ -39,7 +39,9 @@
 
     {% if field.help_text %}
 
-        {{ field.help_text }}
+        <div class="ui tiny warning message">
+            {{ field.help_text }}
+        </div>
 
     {% endif %}
 

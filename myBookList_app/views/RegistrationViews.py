@@ -5,8 +5,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 
-from myBookList_app.forms.registrationForms import CustomUserCreationForm
-from myBookList_app.views.Shortcut import render_with_skelet
+from myBookList_app.forms.RegistrationForms import CustomUserCreationForm
 
 
 class SignIn(View):
@@ -15,7 +14,7 @@ class SignIn(View):
     def get(self, request):
         form = CustomUserCreationForm()
 
-        return render_with_skelet(request, self.template, {'form': form})
+        return render(request, self.template, {'form': form})
 
     def post(self, request):
         form = CustomUserCreationForm(request.POST)
@@ -24,7 +23,7 @@ class SignIn(View):
             form.save()
             return redirect(reverse('index'))
 
-        return render_with_skelet(request, self.template, {'form': form})
+        return render(request, self.template, {'form': form})
 
 
 class LogIn(View):
@@ -33,14 +32,10 @@ class LogIn(View):
     def get(self, request):
         form = AuthenticationForm()
 
-        return render_with_skelet(request, self.template, {'form': form})
+        return render(request, self.template, {'form': form})
 
     def post(self, request):
         form = AuthenticationForm(request=request, data=request.POST)
-
-        print(request.POST)
-        print(form.is_bound)
-        print(form.errors)
 
         if form.is_valid():
             data = form.clean()
@@ -49,7 +44,7 @@ class LogIn(View):
 
             return redirect(reverse('index'))
 
-        return render_with_skelet(request, self.template, {'form': form})
+        return render(request, self.template, {'form': form})
 
 
 class LogOut(View):
@@ -60,10 +55,10 @@ class LogOut(View):
         if request.user.is_authenticated:
             logout(request)
 
-            return render_with_skelet(request, self.template, {'was_connected': True})
+            return render(request, self.template, {'was_connected': True})
 
         else:
-            return render_with_skelet(request, self.template, {'was_connected': False})
+            return render(request, self.template, {'was_connected': False})
 
 
 

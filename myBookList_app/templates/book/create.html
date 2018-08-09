@@ -1,10 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'skeleton.html' %}
+{% load widget_tweaks %}
+{% load load_input %}
+{% load static %}
+
+{% block content %}
+
+    <div class="ui container segment">
+        <form class="ui success warning error form" method="POST" action="{% url 'Book create' %}">
+
+            {% csrf_token %}
+
+            <div class="ui grid">
+                <div class="eight wide column">
+                    {% standard_field form.name %}
+                    {% date_field form.date %}
+                    {% standard_field form.synopsis %}
+                </div>
+                <div class="eight wide column">
+                    {% standard_field form.isbn %}
+                    {% standard_field form.author %}
+                    {% standard_field form.genres %}
+                </div>
+                <div class="wide column">
+                    <input type="submit" class="ui positive button" value="Ajouter le livre">
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(document).ready(function () {
+            standard_date('{{ form.date.auto_id }}')
+        })
+    </script>
+{% endblock %}
