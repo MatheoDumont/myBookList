@@ -1,0 +1,56 @@
+{% load widget_tweaks %}
+{% if form.is_bound %}
+
+    {% if field.errors %}
+
+        <div class="ui tiny error message">
+                <ul class="list">
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+        </div>
+
+        <div class="field error">
+
+            <div class="ui label">
+                {{ field.label_tag }}
+            </div>
+
+            {% render_field field class="ui input error" %}
+
+        </div>
+
+    {% else %}
+
+        <div class="field success">
+
+            <div class="ui label">
+                {{ field.label_tag }}
+            </div>
+
+            {% render_field field class="ui input success" %}
+
+        </div>
+
+    {% endif %}
+
+{% else %}
+
+    {% if field.help_text %}
+
+        {{ field.help_text }}
+
+    {% endif %}
+
+    <div class="field">
+
+        <div class="ui label">
+            {{ field.label_tag }}
+        </div>
+
+        {% render_field field class="ui input" %}
+
+    </div>
+
+{% endif %}
