@@ -1,6 +1,7 @@
 {% extends 'skeleton.html' %}
 
 {% load widget_tweaks %}
+{% load load_input %}
 
 {% block content %}
 
@@ -31,51 +32,8 @@
 
                         {% endif %}
 
-                        {% for field in form.visible_fields %}
-
-                            {% if form.is_bound %}
-
-                                {% if field.errors %}
-
-                                    <div class="field error">
-
-                                        <div class="ui label">
-                                            {{ field.label_tag }}
-                                        </div>
-
-                                        {% render_field field class="ui input error" %}
-
-                                    </div>
-
-                                {% else %}
-
-                                    <div class="field success">
-
-                                        <div class="ui label">
-                                            {{ field.label_tag }}
-                                        </div>
-
-                                        {% render_field field class="ui input success" %}
-
-                                    </div>
-
-                                 {% endif %}
-
-                            {% else %}
-
-                                <div class="field">
-
-                                    <div class="ui label">
-                                        {{ field.label_tag }}
-                                    </div>
-
-                                    {% render_field field class="ui input" %}
-
-                                </div>
-
-                            {% endif %}
-
-                        {% endfor %}
+                        {% standard_field form.username True True %}
+                        {% standard_field form.password True True %}
 
                         <input type="submit" value="Se connecter" class="ui blue submit button">
                     </form>

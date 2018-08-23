@@ -1,12 +1,13 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+from .services.BookServices import generate_path_for_save
 # à compléter
-choicesNationality = ("FR", "France"), ("US", "USA"), ("UK", "United Kingdom")
+choicesNationality = ("FR", "France"), ("US", "USA"), ("UK", "United Kingdom"), ("Ru", "Russie"), ("Ge", "Allemagne"), ("Au", "Autriche")
 
 choicesType = ("tri", "trilogie"), ("cyc", "cycle"), ("sin", "single")
 
-stateUserBook = ("toRead", "à Lire"), ("abandoned", "abandonné"), ("pending", "en Attente"), ("onGoing", "en Cours")
+stateUserBook = ("toRead", "à Lire"), ("abandoned", "abandonné"), ("pending", "en Attente"), ("onGoing", "en Cours"), ("undefined", "Non défini")
 
 
 # ------------------------------  Models  --------------------------------------
@@ -41,10 +42,14 @@ class Book(models.Model):
     genres = models.ManyToManyField(to="Genre", db_table='Link_Book_To_Genre')
     synopsis = models.TextField(blank=True)
     isbn = models.CharField(blank=True, max_length=100)
+    front_page_cover = models.ImageField(default=None,
+                                         upload_to=generate_path_for_save,
+                                         max_length=1000
+                                         )
 
     class Meta:
-        verbose_name = "Book"
-        verbose_name_plural = "Books"
+        verbose_name = "Livre"
+        verbose_name_plural = "Livres"
 
     def __str__(self):
         return self.name

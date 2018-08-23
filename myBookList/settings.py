@@ -125,3 +125,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = 'index'
+
+LOGIN_URL = 'Registration login'
+
+USERS_DATAS = "myBookList_app/users-datas/"
+
+FRONT_PAGE_BOOK_COVER = USERS_DATAS + "front-page-book-cover/"

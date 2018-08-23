@@ -1,23 +1,142 @@
 {% load widget_tweaks %}
 {% load load_input %}
 
-{% if form.is_bound %}
+{% if display_label_with_class %}
 
-    {% if field.errors %}
+    {% build_label field.label_tag True as label %}
 
-        <div class="ui tiny error message">
-                <ul class="list">
-                    {% for error in field.errors %}
-                        <li>{{ error }}</li>
-                    {% endfor %}
-                </ul>
+{% else %}
+
+    {% build_label field.label_tag False as label %}
+
+{% endif %}
+
+{% if required %}
+
+    {% if form.is_bound %}
+
+        {% if field.errors %}
+
+            <div class="ui tiny error message">
+                    <ul class="list">
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+            </div>
+
+            <div class="required field error">
+
+                {{ label }}
+
+                <div class="ui calendar" id="{{ field.auto_id }}">
+                    <div class="ui input left icon" >
+                        <i class="calendar icon"></i>
+                        {% render_field field required='' %}
+                    </div>
+                </div>
+
+            </div>
+
+        {% else %}
+
+            <div class="required field success">
+
+                {{ label }}
+
+                <div class="ui calendar" id="{{ field.auto_id }}">
+                    <div class="ui input left icon" >
+                        <i class="calendar icon"></i>
+                        {% render_field field required='' %}
+                    </div>
+                </div>
+
+            </div>
+
+        {% endif %}
+
+    {% else %}
+
+        {% if field.help_text %}
+
+            <div class="ui tiny warning message">
+                {{ field.help_text }}
+            </div>
+
+        {% endif %}
+
+        <div class="required field">
+
+            {{ label }}
+
+            <div class="ui calendar" id="{{ field.auto_id }}">
+                <div class="ui input left icon" >
+                    <i class="calendar icon"></i>
+                    {% render_field field required='' %}
+                </div>
+            </div>
+
         </div>
 
-        <div class="field error">
+    {% endif %}
 
-            <div class="ui label">
-                {{ field.label_tag }}
+{% else %}
+
+    {% if form.is_bound %}
+
+        {% if field.errors %}
+
+            <div class="ui tiny error message">
+                    <ul class="list">
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
             </div>
+
+            <div class="field error">
+
+                 {{ label }}
+
+                <div class="ui calendar" id="{{ field.auto_id }}">
+                    <div class="ui input left icon" >
+                        <i class="calendar icon"></i>
+                        {% render_field field  %}
+                    </div>
+                </div>
+
+            </div>
+
+        {% else %}
+
+            <div class="field success">
+
+                {{ label }}
+
+                <div class="ui calendar" id="{{ field.auto_id }}">
+                    <div class="ui input left icon" >
+                        <i class="calendar icon"></i>
+                        {% render_field field%}
+                    </div>
+                </div>
+
+            </div>
+
+        {% endif %}
+
+    {% else %}
+
+        {% if field.help_text %}
+
+            <div class="ui tiny warning message">
+                {{ field.help_text }}
+            </div>
+
+        {% endif %}
+
+        <div class="field">
+
+            {{ label }}
 
             <div class="ui calendar" id="{{ field.auto_id }}">
                 <div class="ui input left icon" >
@@ -28,48 +147,6 @@
 
         </div>
 
-    {% else %}
-
-        <div class="field success">
-
-            <div class="ui label">
-                {{ field.label_tag }}
-            </div>
-
-            <div class="ui calendar" id="{{ field.auto_id }}">
-                <div class="ui input left icon" >
-                    <i class="calendar icon"></i>
-                    {% render_field field%}
-                </div>
-            </div>
-
-        </div>
-
     {% endif %}
-
-    {% else %}
-
-    {% if field.help_text %}
-
-        <div class="ui tiny warning message">
-            {{ field.help_text }}
-        </div>
-
-    {% endif %}
-
-    <div class="field">
-
-        <div class="ui label">
-            {{ field.label_tag }}
-        </div>
-
-        <div class="ui calendar" id="{{ field.auto_id }}">
-            <div class="ui input left icon" >
-                <i class="calendar icon"></i>
-                {% render_field field %}
-            </div>
-        </div>
-
-    </div>
 
 {% endif %}

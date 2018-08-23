@@ -1,35 +1,65 @@
 {% load widget_tweaks %}
-{% if form.is_bound %}
+{% load load_input %}
 
-    {% if field.errors %}
+{% if display_label_with_class %}
 
-        <div class="ui tiny error message">
-                <ul class="list">
-                    {% for error in field.errors %}
-                        <li>{{ error }}</li>
-                    {% endfor %}
-                </ul>
-        </div>
+    {% build_label field.label_tag True as label %}
 
-        <div class="field error">
+{% else %}
 
-            <div class="ui label">
-                {{ field.label_tag }}
+    {% build_label field.label_tag False as label %}
+
+{% endif %}
+
+{% if required %}
+
+    {% if form.is_bound %}
+
+        {% if field.errors %}
+
+            <div class="ui tiny error message">
+                    <ul class="list">
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
             </div>
 
-            {% render_field field class="ui input error" %}
+            <div class="required field error">
 
-        </div>
+                {{ label }}
+
+                {% render_field field class="ui input error" required='' %}
+
+            </div>
+
+        {% else %}
+
+            <div class="required field success">
+
+                {{ label }}
+
+                {% render_field field class="ui input success" required='' %}
+
+            </div>
+
+        {% endif %}
 
     {% else %}
 
-        <div class="field success">
+        {% if field.help_text %}
 
-            <div class="ui label">
-                {{ field.label_tag }}
+            <div class="ui tiny warning message">
+                {{ field.help_text }}
             </div>
 
-            {% render_field field class="ui input success" %}
+        {% endif %}
+
+        <div class="required field">
+
+            {{ label }}
+
+            {% render_field field class="ui input" required='' %}
 
         </div>
 
@@ -37,22 +67,56 @@
 
 {% else %}
 
-    {% if field.help_text %}
+    {% if form.is_bound %}
 
-        <div class="ui tiny warning message">
-            {{ field.help_text }}
+        {% if field.errors %}
+
+            <div class="ui tiny error message">
+                    <ul class="list">
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+            </div>
+
+            <div class="field error">
+
+                {{ label }}
+
+                {% render_field field class="ui input error" %}
+
+            </div>
+
+        {% else %}
+
+            <div class="field success">
+
+                {{ label }}
+
+                {% render_field field class="ui input success" %}
+
+            </div>
+
+        {% endif %}
+
+    {% else %}
+
+        {% if field.help_text %}
+
+            <div class="ui tiny warning message">
+                {{ field.help_text }}
+            </div>
+
+        {% endif %}
+
+        <div class="field">
+
+            {{ label }}
+
+            {% render_field field class="ui input" %}
+
         </div>
 
     {% endif %}
-
-    <div class="field">
-
-        <div class="ui label">
-            {{ field.label_tag }}
-        </div>
-
-        {% render_field field class="ui input" %}
-
-    </div>
 
 {% endif %}

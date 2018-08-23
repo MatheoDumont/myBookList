@@ -6,7 +6,7 @@
 {% block content %}
 
     <div class="ui container segment">
-        <form class="ui success warning error form" method="POST" action="{% url 'Book create' %}">
+        <form class="ui success warning error form" enctype="multipart/form-data" method="POST" action="{% url 'Book create' %}">
 
             {% csrf_token %}
 
@@ -15,11 +15,20 @@
                     {% standard_field form.name %}
                     {% date_field form.date %}
                     {% standard_field form.synopsis %}
+                    {% standard_field form.front_page_cover %}
                 </div>
                 <div class="eight wide column">
                     {% standard_field form.isbn %}
-                    {% standard_field form.author %}
+                    {# {% standard_field form.author %} #}
+                    <div class="ui search">
+                          <div class="ui icon fluid input">
+                              {% render_field form.author class="prompt" placeholder="Entrer un auteur..." %}
+                            <i class="search icon"></i>
+                          </div>
+                          <div class="results"></div>
+                    </div>
                     {% standard_field form.genres %}
+                    <img id="cover_img" class="ui image small" src="#" alt="image avant l'upload">
                 </div>
                 <div class="wide column">
                     <input type="submit" class="ui positive button" value="Ajouter le livre">
@@ -31,9 +40,35 @@
 {% endblock %}
 
 {% block script %}
+    <script src="{% static 'js/templates/book/create.js' %}"></script>
     <script>
         $(document).ready(function () {
-            standard_date('{{ form.date.auto_id }}')
+            
+            standard_date('{{ form.date.auto_id }}');
+            
+            $('#{{ form.front_page_cover.auto_id }}').change(function () {
+                readURLforDisplay(this)
+            });
+
+
+            $('.ui.search').search({
+                apiSettings: {
+                    url: '{% url 'Api author' %}?q={query}',
+                    onResponse : function (serverResponse) {
+
+                        var response= {
+                            results : []
+                        };
+                        $.each(serverResponse, function (index, item) {
+                            response.results.push({
+                                title : item.name + ' ' + item.forename,
+                            })
+                        });
+                        return response;
+
+                    }
+                },
+            });
         })
     </script>
 {% endblock %}

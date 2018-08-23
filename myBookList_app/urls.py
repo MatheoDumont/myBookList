@@ -1,15 +1,17 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 
-
-from . import views
+from myBookList_app.views import ApiViews, IndexViews, RegistrationViews, BookViews
+from .views import *
 
 urlpatterns = [
-    path('', views.IndexViews.Index.as_view(), name='index'),
+    path('', IndexViews.Index.as_view(), name='index'),
 
-    path('registration/sign-in', views.RegistrationViews.SignIn.as_view(), name='Registration sign-in'),
-    path('registration/login', views.RegistrationViews.LogIn.as_view(), name='Registration login'),
-    path('registration/logout', views.RegistrationViews.LogOut.as_view(), name='Registration logout'),
+    path('registration/sign-in', RegistrationViews.SignIn.as_view(), name='Registration sign-in'),
+    path('registration/login', RegistrationViews.LogIn.as_view(), name='Registration login'),
+    path('registration/logout', RegistrationViews.LogOut.as_view(), name='Registration logout'),
 
-    path('book/create', views.BookView.Create.as_view(), name='Book create'),
+    path('book/create', BookViews.Create.as_view(), name='Book create'),
+
+    path('api/author', ApiViews.ApiAuthor.as_view(), name='Api author'),
 ]

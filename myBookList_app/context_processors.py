@@ -10,4 +10,9 @@ Pour plus d'infos : https://docs.djangoproject.com/fr/2.1/ref/templates/api/#dja
 
 
 def skeleton_context(request):
+    """
+    Vide pour l'instant car rien n'a afficher encore depuis le skeleton.html
+    :param request:
+    :return:
+    """
     return dict()

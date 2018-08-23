@@ -1,9 +1,16 @@
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.views import View
 from ..forms.BookForms import *
 from django.shortcuts import *
-from ..models import *
+
+"""
+infos = https://docs.djangoproject.com/fr/2.0/topics/http/file-uploads/
+Pour gérer les fichiers
+"""
 
 
+@method_decorator(login_required, name="dispatch")
 class Create(View):
     template = 'book/create.html'
 
@@ -15,16 +22,7 @@ class Create(View):
         })
 
     def post(self, request):
-        b1 = Book.objects.get(id=5)
-
-        g1 = Genre.objects.get(id=1)
-
-
-        b1.genres.add(g1)
-        return redirect('index')
-
-        """
-        form = BookForm(request.POST)
+        form = BookForm(request.POST, request.FILES)
 
         if form.is_valid():
             form.save()
@@ -33,9 +31,6 @@ class Create(View):
         return render(request, self.template, {
             'form': form,
         })
-        :param request:
-        :return:
-        """
 
 
 class Read(View):
