@@ -1,0 +1,31 @@
+{% extends 'skeleton.html' %}
+
+{% block message %}
+
+    <div class="ui grid">
+        <div class="eight column">
+            <div class="ui container segment" style="margin-top: 10px;">
+
+                {% if was_connected %}
+
+                    <div class="ui success message">
+                        <div class="content">
+                            Vous êtes déconnecté, à plus tard :)
+                        </div>
+                    </div>
+
+                {% else %}
+
+                    <div class="ui success message">
+                        <div class="content">
+                            Vous n'étiez pas connecté, mais si vous voulez, <a href="{% url 'Registration login' %}">c'est par ici</a> :)
+                        </div>
+                    </div>
+
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

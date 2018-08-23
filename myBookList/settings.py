@@ -66,6 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'myBookList_app.context_processors.skeleton_context',
             ],
         },
     },
@@ -124,3 +125,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = 'index'
+
+LOGIN_URL = 'Registration login'
+
+USERS_DATAS = "myBookList_app/users-datas/"
+
+FRONT_PAGE_BOOK_COVER = USERS_DATAS + "front-page-book-cover/"

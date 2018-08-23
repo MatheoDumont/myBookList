@@ -1,85 +1,62 @@
-
 {% extends 'skeleton.html' %}
+
 {% load widget_tweaks %}
+{% load load_input %}
 
-{%  block content %}
+{% block content %}
+
     <div class="ui four column center aligned grid container segment">
-        <div class="two column row">
+
+        {% if user.is_authenticated %}
+
             <div class="column">
-                <form class="ui success warning error form" method="POST" action="{% url 'Registration login' %}">
+                <p>Vous êtes déjà connecté(e)</p>
+                <a href="{%  url 'index' %}">Retourner à l'accueil !</a>
+            </div>
 
-                    {% csrf_token %}
+        {% else %}
 
-                    {% if form.non_field_errors %}
+            <div class="two column row">
 
-                        <div class="ui medium warning message">
-                            {{ form.non_field_errors }}
-                        </div>
+                <div class="column">
 
-                    {% endif %}
+                    <form class="ui success warning error form" method="POST" action="{% url 'Registration login' %}">
 
-                    {% for field in form.visible_fields %}
+                        {% csrf_token %}
 
-                        {% if form.is_bound %}
+                        {% if form.non_field_errors %}
 
-                            {% if field.errors %}
-
-                                <div class="field error">
-
-                                    <div class="ui label">
-                                        {{ field.label_tag }}
-                                    </div>
-
-                                    {% render_field field class="ui input error" %}
-
-                                </div>
-
-                            {% else %}
-
-                                <div class="field success">
-
-                                    <div class="ui label">
-                                        {{ field.label_tag }}
-                                    </div>
-
-                                    {% render_field field class="ui input success" %}
-
-                                </div>
-
-                             {% endif %}
-
-                        {% else %}
-
-                            <div class="field">
-
-                                <div class="ui label">
-                                    {{ field.label_tag }}
-                                </div>
-
-                                {% render_field field class="ui input" %}
-
+                            <div class="ui medium warning message">
+                                {{ form.non_field_errors }}
                             </div>
 
                         {% endif %}
 
-                    {% endfor %}
+                        {% standard_field form.username True True %}
+                        {% standard_field form.password True True %}
 
-                    <input type="submit" value="Se connecter" class="ui blue submit button">
-                </form>
+                        <input type="submit" value="Se connecter" class="ui blue submit button">
+                    </form>
+
+                </div>
             </div>
-        </div>
-        <div class="two column row">
-            <div class="column">
-                <div class="ui horizontal divider">OR</div>
+
+            <div class="two column row">
+                <div class="column">
+                    <div class="ui horizontal divider">OR</div>
+                </div>
             </div>
-        </div>
-        <div class="tow column row">
-            <div class="column">
-                <a class="ui labeled icon positive button" href="{% url 'Registration sign-in' %}">
-                    <i class="edit icon"></i>
-                    S'inscrire
-                </a>
+            <div class="tow column row">
+                <div class="column">
+                    <a class="ui labeled icon positive button" href="{% url 'Registration sign-in' %}">
+                        <i class="edit icon"></i>
+                        S'inscrire
+                    </a>
+                </div>
             </div>
-        </div>
+
+        {% endif %}
+
     </div>
+
 {% endblock %}
