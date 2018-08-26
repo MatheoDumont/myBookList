@@ -19,14 +19,7 @@
                 </div>
                 <div class="eight wide column">
                     {% standard_field form.isbn %}
-                    {# {% standard_field form.author %} #}
-                    <div class="ui search">
-                          <div class="ui icon fluid input">
-                              {% render_field form.author class="prompt" placeholder="Entrer un auteur..." %}
-                            <i class="search icon"></i>
-                          </div>
-                          <div class="results"></div>
-                    </div>
+                    {% search_field form.author %}
                     {% standard_field form.genres %}
                     <img id="cover_img" class="ui image small" src="#" alt="image avant l'upload">
                 </div>

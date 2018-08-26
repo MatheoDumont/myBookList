@@ -74,4 +74,9 @@ def standard_field(context, field, *args, **kwargs):
 
 @register.inclusion_tag('load_input/date_field.html', takes_context=True)
 def date_field(context, field, *args, **kwargs):
-    return base_field(context, field, args, **kwargs)
+    return base_field(context, field, args, kwargs)
+
+
+@register.inclusion_tag('load_input/search_field.html', takes_context=True)
+def search_field(context, field, *args, **kwargs):
+    return base_field(context, field, args, kwargs)

@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 from .services.BookServices import generate_path_for_save
+
 # à compléter
 choicesNationality = ("FR", "France"), ("US", "USA"), ("UK", "United Kingdom"), ("Ru", "Russie"), ("Ge", "Allemagne"), ("Au", "Autriche")
 

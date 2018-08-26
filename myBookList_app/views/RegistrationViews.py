@@ -33,7 +33,7 @@ class LogIn(View):
     def get(self, request):
         form = AuthenticationForm(label_suffix='')
 
-        if request.GET['next']:
+        if 'next' in request.GET:
             request.session['next'] = request.GET['next']
 
         return render(request, self.template, {'form': form})
