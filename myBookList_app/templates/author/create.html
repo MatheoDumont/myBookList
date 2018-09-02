@@ -1,0 +1,42 @@
+{% extends 'skeleton.html' %}
+{% load load_input %}
+
+{% block content %}
+
+    <div class="ui container segment">
+
+        <form class="ui success warning error form" method="POST" action="{% url 'Author create' %}">
+
+            {% csrf_token %}
+
+            <div class="ui grid">
+
+                <div class="eight wide column">
+
+                    {% standard_field form.name %}
+                    {% standard_field form.forename %}
+                    {% standard_field form.nationality %}
+                    {% standard_field form.genres %}
+
+                </div>
+
+                <div class="eight wide column">
+
+                    {% standard_field form.birthDate required=False %}
+                    {% standard_field form.deathDate required=False %}
+
+                </div>
+
+                <div class="wide column">
+
+                    <input type="submit" class="ui positive button" value="Ajouter l'auteur">
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+{% endblock %}

@@ -1,6 +1,5 @@
 {% extends 'skeleton.html' %}
 
-{% load widget_tweaks %}
 {% load load_input %}
 
 {% block content %}
@@ -26,16 +25,9 @@
 
                             {% csrf_token %}
 
-                            {% if form.non_field_errors %}
-
-                                <div class="ui medium warning message">
-                                    {{ form.non_field_errors }}
-                                </div>
-
-                            {% endif %}
-
-                            {% standard_field form.username True True %}
-                            {% standard_field form.password True True %}
+                            {% non_field_error %}
+                            {% standard_field form.username display_label_css=True %}
+                            {% standard_field form.password display_label_css=True %}
 
                             <input type="submit" value="Se connecter" class="ui blue submit button">
                         </form>

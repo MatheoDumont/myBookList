@@ -27,35 +27,40 @@ def build_label(label_tag, display_lab=False):
 
 def base_field(context, field, *args, **kwargs):
     """
-    args[0] = required Boolean
-    args[1] = display_label_with_class Boolean
+    kwargs['required'] = required Boolean A savoir que si vous voulez avoir le choix de mettre required dans html, vous devez à l'initalisation du form le spécifié
+    kwargs['display_label_css'] = Si au niveau de l'affichage on utilise la classe css label pour le label de l'input
+    kwargs['display_help_text'] = Si on affichage le help_text de l'input
+
+    exemple :
+        {% standard_field form.un_field [required=True], [display_label_css=False], [display_help_text=False] %}
 
 
-    :param context:
-    :param field:
-    :param args:
-    :param kwargs:
-    :return:
     """
-    # Champ obligatoire de base à part si spécifié False
+
+    # Champ obligatoire par défaut
     required = True
 
     # Affichage du label avec la class css 'ui label'
-    display_label_with_class = False
+    display_label_css = False
 
-    try:
-        if args[0][0]:
-            required = args[0][0]
-        if args[0][1]:
-            display_label_with_class = args[0][1]
-    except IndexError:
-        pass
+    # Affichage du help_text par défaut à True
+    display_help_text = True
+
+    if 'required' in kwargs:
+        required = kwargs['required']
+
+    if 'display_label_css' in kwargs:
+        display_label_css = kwargs['display_label_css']
+
+    if 'display_help_text' in kwargs:
+        display_help_text = kwargs['display_help_text']
 
     return {
         'field': field,
         'form': context['form'],
         'required': required,
-        'display_label_with_class': display_label_with_class,
+        'display_label_css': display_label_css,
+        'display_help_text': display_help_text,
     }
 
 
@@ -69,6 +74,7 @@ def standard_field(context, field, *args, **kwargs):
     :param args:
     :return:
     """
+
     return base_field(context, field, args, **kwargs)
 
 
@@ -80,3 +86,22 @@ def date_field(context, field, *args, **kwargs):
 @register.inclusion_tag('load_input/search_field.html', takes_context=True)
 def search_field(context, field, *args, **kwargs):
     return base_field(context, field, args, kwargs)
+
+
+@register.inclusion_tag('load_input/non_field_error_form_field.html', takes_context=True)
+def non_field_error(context, form=None, *args, **kwargs):
+    retour = {
+        'form': None
+    }
+
+    if form is not None:
+        retour['form'] = form
+    else:
+        if 'form' not in context:
+            raise IndexError(
+                'Vous devez spécifier une instance de form pour le tag \'non_field_error\' (si vous n\'utilisez '
+                'pas l\'indice par défaut \'form\', veuillez spécifier le form en arg)')
+        else:
+            retour['form'] = context['form']
+
+    return retour

@@ -17,8 +17,8 @@ stateUserBook = ("toRead", "à Lire"), ("abandoned", "abandonné"), ("pending", 
 class Author(models.Model):
     name = models.CharField(max_length=100)
     forename = models.CharField(max_length=100)
-    birthDay = models.DateField()
-    deathDay = models.DateField(null=True, blank=True)
+    birthDate = models.DateField(null=True, blank=True)
+    deathDate = models.DateField(null=True, blank=True)
     nationality = models.CharField(choices=choicesNationality, max_length=100)
     genres = models.ManyToManyField(to='Genre', db_table='Link_Author_To_Genre')
 
@@ -49,8 +49,8 @@ class Book(models.Model):
                                          )
 
     class Meta:
-        verbose_name = "Livre"
-        verbose_name_plural = "Livres"
+        verbose_name = "Book"
+        verbose_name_plural = "Books"
 
     def __str__(self):
         return self.name

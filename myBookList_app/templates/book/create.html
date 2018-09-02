@@ -11,21 +11,32 @@
             {% csrf_token %}
 
             <div class="ui grid">
+
                 <div class="eight wide column">
+
                     {% standard_field form.name %}
                     {% date_field form.date %}
                     {% standard_field form.synopsis %}
                     {% standard_field form.front_page_cover %}
+
                 </div>
+
                 <div class="eight wide column">
+
                     {% standard_field form.isbn %}
                     {% search_field form.author %}
                     {% standard_field form.genres %}
+
                     <img id="cover_img" class="ui image small" src="#" alt="image avant l'upload">
+
                 </div>
+
                 <div class="wide column">
+
                     <input type="submit" class="ui positive button" value="Ajouter le livre">
+
                 </div>
+
             </div>
         </form>
     </div>

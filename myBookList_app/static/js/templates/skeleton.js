@@ -9,10 +9,10 @@ $(document).ready(function () {
 
 function onFocusInSearch()
 {
-    $('#searchBar').animate({width:'300px'},"medium");
+    $('#searchBar').animate({width:'300px'}, "medium");
 }
 
 function onFocusOutSearch()
 {
-    $('#searchBar').animate({width:'180px'},"medium");
+    $('#searchBar').animate({width:'180px'}, "medium");
 }
