@@ -1,7 +1,7 @@
 {% load widget_tweaks %}
 {% load load_input %}
 
-{% if display_label_with_class %}
+{% if display_label_css %}
 
     {% build_label field.label_tag True as label %}
 
@@ -47,11 +47,15 @@
 
     {% else %}
 
-        {% if field.help_text %}
+        {% if display_help_text %}
 
-            <div class="ui tiny warning message">
-                {{ field.help_text }}
-            </div>
+            {% if field.help_text %}
+
+                <div class="ui tiny warning message">
+                    {{ field.help_text }}
+                </div>
+
+            {% endif %}
 
         {% endif %}
 
@@ -103,9 +107,13 @@
 
         {% if field.help_text %}
 
-            <div class="ui tiny warning message">
-                {{ field.help_text }}
-            </div>
+            {% if display_help_text %}
+
+                <div class="ui tiny warning message">
+                    {{ field.help_text }}
+                </div>
+
+            {% endif %}
 
         {% endif %}
 

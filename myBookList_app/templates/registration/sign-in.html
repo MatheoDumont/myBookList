@@ -1,5 +1,5 @@
 {% extends 'skeleton.html' %}
-{% load widget_tweaks %}
+{% load load_input %}
 
 {%  block content %}
 
@@ -24,69 +24,10 @@
 
                             {% csrf_token %}
 
-                            {% for field in form.visible_fields %}
-
-                                {% if form.is_bound %}
-
-                                    {% if field.errors %}
-
-                                        <div class="ui tiny error message">
-                                                <ul class="list">
-                                                    {% for error in field.errors %}
-                                                        <li>{{ error }}</li>
-                                                    {% endfor %}
-                                                </ul>
-                                        </div>
-
-                                        <div class="field error">
-
-                                            <div class="ui label">
-                                                {{ field.label_tag }}
-                                            </div>
-
-                                            {% render_field field class="ui input error" %}
-
-                                        </div>
-
-                                    {% else %}
-
-                                        <div class="field success">
-
-                                            <div class="ui label">
-                                                {{ field.label_tag }}
-                                            </div>
-
-                                            {% render_field field class="ui input success" %}
-                                        </div>
-
-                                    {% endif %}
-
-                                {% else %}
-
-                                    {% if field.help_text %}
-                                        {% if field != form.password1 %}
-
-                                            <div class="ui tiny warning message">
-                                                {{ field.help_text }}
-                                            </div>
-
-                                        {% endif %}
-
-                                    {% endif %}
-
-                                    <div class="field">
-
-                                        <div class="ui label">
-                                            {{ field.label_tag }}
-                                        </div>
-
-                                        {% render_field field class="ui input" %}
-
-                                    </div>
-
-                                {% endif %}
-
-                            {% endfor %}
+                            {% standard_field form.username %}
+                            {% standard_field form.email %}
+                            {% standard_field form.password1 display_help_text=False %}
+                            {% standard_field form.password2 %}
 
                             <input type="submit" value="S'inscrire" class="positive ui button">
                         </form>
