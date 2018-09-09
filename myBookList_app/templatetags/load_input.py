@@ -30,6 +30,8 @@ def base_field(context, field, *args, **kwargs):
     kwargs['required'] = required Boolean A savoir que si vous voulez avoir le choix de mettre required dans html, vous devez à l'initalisation du form le spécifié
     kwargs['display_label_css'] = Si au niveau de l'affichage on utilise la classe css label pour le label de l'input
     kwargs['display_help_text'] = Si on affichage le help_text de l'input
+    kwargs['with_action_button'] = l'input est libellé d'un bouton
+
 
     exemple :
         {% standard_field form.un_field [required=True], [display_label_css=False], [display_help_text=False] %}
@@ -46,6 +48,9 @@ def base_field(context, field, *args, **kwargs):
     # Affichage du help_text par défaut à True
     display_help_text = True
 
+    # with_action_button par défaut à False
+    with_action_button = False
+
     if 'required' in kwargs:
         required = kwargs['required']
 
@@ -55,12 +60,16 @@ def base_field(context, field, *args, **kwargs):
     if 'display_help_text' in kwargs:
         display_help_text = kwargs['display_help_text']
 
+    if 'with_action_button' in kwargs:
+        with_action_button = kwargs['with_action_button']
+
     return {
         'field': field,
         'form': context['form'],
         'required': required,
         'display_label_css': display_label_css,
         'display_help_text': display_help_text,
+        'with_action_button': with_action_button,
     }
 
 
@@ -80,12 +89,12 @@ def standard_field(context, field, *args, **kwargs):
 
 @register.inclusion_tag('load_input/date_field.html', takes_context=True)
 def date_field(context, field, *args, **kwargs):
-    return base_field(context, field, args, kwargs)
+    return base_field(context, field, *args, **kwargs)
 
 
 @register.inclusion_tag('load_input/search_field.html', takes_context=True)
 def search_field(context, field, *args, **kwargs):
-    return base_field(context, field, args, kwargs)
+    return base_field(context, field, *args, **kwargs)
 
 
 @register.inclusion_tag('load_input/non_field_error_form_field.html', takes_context=True)

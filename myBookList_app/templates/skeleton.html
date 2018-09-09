@@ -22,10 +22,12 @@
 
                 <div class="right menu">
                     <div class="item">
-                        <div class="ui transparent icon input">
-                            <input id="searchBar" type="text" placeholder="Search...">
-                            <i class="search icon"></i>
-                        </div>
+                        <form id="searchForm" method="GET" action="{% url 'Search' %}">
+                            <div class="ui action input" style="width: 100%;">
+                                <input id="searchBar" type="text" placeholder="Search..." >
+                                <button type="submit" id="submitButton" class="ui small button" disabled><i class="search icon"></i></button>
+                            </div>
+                        </form>
                     </div>
 
                     {% if user.is_authenticated %}

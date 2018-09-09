@@ -24,7 +24,7 @@
                 <div class="eight wide column">
 
                     {% standard_field form.isbn %}
-                    {% search_field form.author %}
+                    {% search_field form.author with_action_button=True %}
                     {% standard_field form.genres %}
 
                     <img id="cover_img" class="ui image small" src="#" alt="image avant l'upload">
@@ -57,7 +57,7 @@
 
             $('.ui.search').search({
                 apiSettings: {
-                    url: '{% url 'Api author' %}?q={query}',
+                    url: '{% url 'Author api' %}?q={query}',
                     onResponse : function (serverResponse) {
 
                         var response= {
@@ -68,6 +68,7 @@
                                 title : item.name + ' ' + item.forename,
                             })
                         });
+
                         return response;
 
                     }

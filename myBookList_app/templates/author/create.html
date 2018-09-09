@@ -1,5 +1,6 @@
 {% extends 'skeleton.html' %}
 {% load load_input %}
+{% load static %}
 
 {% block content %}
 
@@ -22,8 +23,8 @@
 
                 <div class="eight wide column">
 
-                    {% standard_field form.birthDate required=False %}
-                    {% standard_field form.deathDate required=False %}
+                    {% date_field form.birthDate required=False %}
+                    {% date_field form.deathDate required=False %}
 
                 </div>
 
@@ -39,4 +40,14 @@
 
     </div>
 
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(document).ready(function () {
+
+            standard_date('{{ form.birthDate.auto_id }}');
+            standard_date('{{ form.deathDate.auto_id }}');
+        })
+    </script>
 {% endblock %}

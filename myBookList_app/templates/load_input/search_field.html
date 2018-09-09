@@ -11,6 +11,7 @@
 
 {% endif %}
 
+
 {% if required %}
 
     {% if form.is_bound %}
@@ -29,14 +30,32 @@
 
                 {{ label }}
 
-                <div class="ui search">
-                      <div class="ui icon fluid input error">
-                          {% render_field form.author class="prompt" placeholder="Entrer un auteur..." required='' %}
+                {% if with_action_button %}
 
-                          <i class="search icon"></i>
-                      </div>
-                      <div class="results"></div>
-                </div>
+                    <div class="ui search">
+                          <div class="ui fluid action input error">
+                              {% render_field form.author class="prompt" placeholder="Entrer un auteur..." required='' %}
+
+                              <a href="{% url 'Author create' next='Book create' %}" target="_blank" class="ui teal labeled icon button">
+                                <i class="icon plus"></i>
+                                  Ajouter un auteur
+                              </a>
+                          </div>
+                          <div class="results"></div>
+                    </div>
+
+                {% else %}
+
+                    <div class="ui search">
+                          <div class="ui icon fluid input error">
+                              {% render_field form.author class="prompt" placeholder="Entrer un auteur..." required='' %}
+
+                              <i class="search icon"></i>
+                          </div>
+                          <div class="results"></div>
+                    </div>
+
+                {% endif %}
 
             </div>
 
@@ -46,14 +65,32 @@
 
                 {{ label }}
 
-                <div class="ui search">
-                      <div class="ui icon fluid input success">
-                          {% render_field form.author class="prompt" placeholder="Entrer un auteur..." required='' %}
+                {% if with_action_button %}
 
-                          <i class="search icon"></i>
-                      </div>
-                      <div class="results"></div>
-                </div>
+                    <div class="ui search">
+                          <div class="ui  fluid action input success">
+                              {% render_field form.author class="prompt" placeholder="Entrer un auteur..." required='' %}
+
+                              <a href="{% url 'Author create' %}" class="ui teal labeled icon button">
+                                  <i class="icon plus"></i>
+                                  Ajouter un auteur
+                              </a>
+                          </div>
+                          <div class="results"></div>
+                    </div>
+
+                {% else %}
+
+                    <div class="ui search">
+                          <div class="ui icon fluid input success">
+                              {% render_field form.author class="prompt" placeholder="Entrer un auteur..." required='' %}
+
+                              <i class="search icon"></i>
+                          </div>
+                          <div class="results"></div>
+                    </div>
+
+                {% endif %}
 
             </div>
 
@@ -61,11 +98,17 @@
 
     {% else %}
 
-        {% if field.help_text %}
+        {% if display_help_text %}
 
-            <div class="ui tiny warning message">
-                {{ field.help_text }}
-            </div>
+            {% if field.help_text %}
+
+                <div class="ui tiny warning message">
+
+                    {{ field.help_text }}
+
+                </div>
+
+            {% endif %}
 
         {% endif %}
 
@@ -73,14 +116,32 @@
 
             {{ label }}
 
-            <div class="ui search">
-                  <div class="ui icon fluid input">
-                      {% render_field form.author class="prompt" placeholder="Entrer un auteur..." required='' %}
+            {% if with_action_button %}
 
-                      <i class="search icon"></i>
-                  </div>
-                  <div class="results"></div>
-            </div>
+                <div class="ui search">
+                      <div class="ui fluid action input">
+                          {% render_field form.author class="prompt" placeholder="Entrer un auteur..." required='' %}
+
+                          <a href="{% url 'Author create' %}" class="ui teal labeled icon button">
+                              <i class="icon plus"></i>
+                              Ajouter un auteur
+                          </a>
+                      </div>
+                      <div class="results"></div>
+                </div>
+
+            {% else %}
+
+                <div class="ui search">
+                      <div class="ui icon fluid input">
+                          {% render_field form.author class="prompt" placeholder="Entrer un auteur..." required='' %}
+
+                          <i class="search icon"></i>
+                      </div>
+                      <div class="results"></div>
+                </div>
+
+            {% endif %}
 
         </div>
 
@@ -104,14 +165,32 @@
 
                 {{ label }}
 
-                <div class="ui search">
-                      <div class="ui icon fluid input error">
-                          {% render_field form.author class="prompt" placeholder="Entrer un auteur..." %}
+                {% if with_action_button %}
 
-                          <i class="search icon"></i>
-                      </div>
-                      <div class="results"></div>
-                </div>
+                    <div class="ui search">
+                          <div class="ui fluid action input error">
+                              {% render_field form.author class="prompt" placeholder="Entrer un auteur..." %}
+
+                              <a href="{% url 'Author create' %}" class="ui teal labeled icon button">
+                                  <i class="icon plus"></i>
+                                  Ajouter un auteur
+                              </a>
+                          </div>
+                          <div class="results"></div>
+                    </div>
+
+                {% else %}
+
+                    <div class="ui search">
+                          <div class="ui icon fluid input error">
+                              {% render_field form.author class="prompt" placeholder="Entrer un auteur..." %}
+
+                              <i class="search icon"></i>
+                          </div>
+                          <div class="results"></div>
+                    </div>
+
+                {% endif %}
 
             </div>
 
@@ -121,14 +200,32 @@
 
                 {{ label }}
 
-                <div class="ui search">
-                      <div class="ui icon fluid input success">
-                          {% render_field form.author class="prompt" placeholder="Entrer un auteur..." %}
+                {% if with_action_button %}
 
-                          <i class="search icon"></i>
-                      </div>
-                      <div class="results"></div>
-                </div>
+                    <div class="ui search">
+                          <div class="ui fluid action input success">
+                              {% render_field form.author class="prompt" placeholder="Entrer un auteur..." %}
+
+                              <a href="{% url 'Author create' %}" class="ui teal labeled icon button">
+                                  <i class="icon plus"></i>
+                                  Ajouter un auteur
+                              </a>
+                          </div>
+                          <div class="results"></div>
+                    </div>
+
+                {% else %}
+
+                    <div class="ui search">
+                          <div class="ui icon fluid input success">
+                              {% render_field form.author class="prompt" placeholder="Entrer un auteur..." %}
+
+                              <i class="search icon"></i>
+                          </div>
+                          <div class="results"></div>
+                    </div>
+
+                {% endif %}
 
             </div>
 
@@ -136,11 +233,17 @@
 
     {% else %}
 
-        {% if field.help_text %}
+        {% if display_help_text %}
 
-            <div class="ui tiny warning message">
-                {{ field.help_text }}
-            </div>
+            {% if field.help_text %}
+
+                <div class="ui tiny warning message">
+
+                    {{ field.help_text }}
+
+                </div>
+
+            {% endif %}
 
         {% endif %}
 
@@ -148,14 +251,32 @@
 
             {{ label }}
 
-            <div class="ui search">
-                  <div class="ui icon fluid input">
-                      {% render_field form.author class="prompt" placeholder="Entrer un auteur..." %}
+            {% if with_action_button %}
 
-                      <i class="search icon"></i>
-                  </div>
-                  <div class="results"></div>
-            </div>
+                <div class="ui search">
+                      <div class="ui fluid action input">
+                          {% render_field form.author class="prompt" placeholder="Entrer un auteur..." %}
+
+                          <a href="{% url 'Author create' %}" class="ui teal labeled icon button">
+                              <i class="icon plus"></i>
+                              Ajouter un auteur
+                          </a>
+                      </div>
+                      <div class="results"></div>
+                </div>
+
+            {% else %}
+
+                <div class="ui search">
+                      <div class="ui icon fluid input">
+                          {% render_field form.author class="prompt" placeholder="Entrer un auteur..." %}
+
+                          <i class="search icon"></i>
+                      </div>
+                      <div class="results"></div>
+                </div>
+
+            {% endif %}
 
         </div>
 

@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.views import View
+from django.http import JsonResponse
 
 from myBookList_app.forms.AuthorForms import AuthorForm
+from myBookList_app.services.ApiServices import search_author
 
 
 class Create(View):
@@ -21,3 +23,19 @@ class Create(View):
             return redirect('index')
 
         return render(request, self.template, {'form': form})
+
+
+class Api(View):
+    sessionAuthorBookKey = 'book_creation_author_id'
+
+    def get(self, request):
+        if not request.GET['q']:
+            return JsonResponse(None)
+
+        # On récupère la requête avec dedans l'author recherché
+        q = request.GET['q']
+
+        # Algo de recherche d'auteur
+        authorslist = search_author(q)
+
+        return JsonResponse(authorslist, safe=False)

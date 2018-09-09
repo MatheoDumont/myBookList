@@ -105,12 +105,14 @@
 
     {% else %}
 
-        {% if field.help_text %}
+        {% if display_help_text %}
 
-            {% if display_help_text %}
+            {% if field.help_text %}
 
                 <div class="ui tiny warning message">
+
                     {{ field.help_text }}
+
                 </div>
 
             {% endif %}
