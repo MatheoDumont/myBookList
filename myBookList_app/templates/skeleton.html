@@ -1,4 +1,5 @@
 {% load static %}
+{% load widget_tweaks %}
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -23,8 +24,9 @@
                 <div class="right menu">
                     <div class="item">
                         <form id="searchForm" method="GET" action="{% url 'Search' %}">
+                            {% csrf_token %}
                             <div class="ui action input" style="width: 100%;">
-                                <input id="searchBar" type="text" placeholder="Search..." >
+                                {% render_field searchForm.searchInput id="searchBar" placeholder="Search..." %}
                                 <button type="submit" id="submitButton" class="ui small button" disabled><i class="search icon"></i></button>
                             </div>
                         </form>

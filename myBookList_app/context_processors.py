@@ -7,6 +7,7 @@ Un context_processor doit obligatoirement retourner un dict.
 Chaque context_processor reçcoit une instance de HttpRequest.
 Pour plus d'infos : https://docs.djangoproject.com/fr/2.1/ref/templates/api/#django.template.RequestContext
 """
+from myBookList_app.forms.SearchForms import SearchForm
 
 
 def skeleton_context(request):
@@ -15,4 +16,5 @@ def skeleton_context(request):
     :param request:
     :return:
     """
-    return dict()
+    searchForm = SearchForm()
+    return {'searchForm': searchForm}
