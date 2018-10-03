@@ -1,19 +1,19 @@
 
 $(document).ready(function () {
     // On attache les fonctions pour l'animation de la barre de recherche
-    $('#searchBar').focusin(onFocusInSearch);
-    $('#searchBar').focusout(onFocusOutSearch);
-    $('#searchBar').on('input',onInput);
+    $('#id_search').focusin(onFocusInSearch);
+    $('#id_search').focusout(onFocusOutSearch);
+    $('#id_search').on('input',onInput);
 });
 
 function onFocusInSearch()
 {
-    $('#searchBar').animate({width:'300px'}, "medium");
+    $('#id_search').animate({width:'300px'}, "medium");
 }
 
 function onFocusOutSearch()
 {
-    $('#searchBar').animate({width:'180px'}, "medium");
+    $('#id_search').animate({width:'180px'}, "medium");
 }
 
 function onInput(e) {

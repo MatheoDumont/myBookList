@@ -1,6 +1,8 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
+from django.conf.urls.static import static
 
+from myBookList import settings
 from myBookList_app.views import IndexViews, RegistrationViews, BookViews, AuthorViews, SearchViews
 from .views import *
 
@@ -17,4 +19,5 @@ urlpatterns = [
     path('author/api', AuthorViews.Api.as_view(), name='Author api'),
 
     path('search/', SearchViews.Search.as_view(), name='Search')
+
 ]

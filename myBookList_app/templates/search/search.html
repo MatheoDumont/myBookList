@@ -1,4 +1,60 @@
 {% extends 'skeleton.html' %}
+{% load static %}
+{% load load_input %}
+
 
 {% block content %}
+
+    <div class="ui container segment">
+        {# On affiche le nombre de résultat trouvé #}
+        {% if res_search|length is not 0 %}
+
+            <div class="ui header">
+                <h3><strong>{{ res_search|length }}</strong> résultat(s)</h3>
+            </div>
+
+        {% else %}
+
+            <div class="ui header">
+                <h3>Aucun résultat(s) trouvé(s)</h3>
+            </div>
+
+        {% endif %}
+
+        {# Puis le résultat #}
+
+        {% if res_search|length is not 0 %}
+
+            <div class="ui items">
+
+                {% for search in res_search %}
+
+                    <div class="ui item">
+                        <div class="image">
+                        {{ "a"|add:search.front_page_cover }}
+                            {% with 'media/front-page-book-cover/'|addstr:search.front_page_cover as urlphoto %}
+                                <img src="{% static urlphoto %}" alt="books_front_cover">
+                            {% endwith %}
+                        </div>
+                        <div class="content">
+                            <a class="header">{{ search.name }}</a>
+                            <div class="meta">
+                                <span>Synopsis</span>
+                            </div>
+                            <div class="description">
+                                <p>{{ search.synopsis }}</p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% endif %}
+
+
+    </div>
+
 {% endblock %}

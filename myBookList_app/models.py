@@ -1,7 +1,11 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.core.files.storage import FileSystemStorage
 
+from myBookList import settings
 from .services.BookServices import generate_path_for_save
+
+fs = FileSystemStorage(location=settings.MEDIA_ROOT+'/front-page-book-cover')
 
 # à compléter
 choicesNationality = ("FR", "France"), ("US", "USA"), ("UK", "United Kingdom"), ("Ru", "Russie"), ("Ge", "Allemagne"), ("Au", "Autriche")
@@ -45,7 +49,8 @@ class Book(models.Model):
     isbn = models.CharField(blank=True, max_length=100)
     front_page_cover = models.ImageField(default=None,
                                          upload_to=generate_path_for_save,
-                                         max_length=1000
+                                         max_length=1000,
+                                         storage=fs
                                          )
 
     class Meta:

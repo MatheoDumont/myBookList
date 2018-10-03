@@ -122,12 +122,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-STATIC_URL = '/static/'
+MYBOOKLIST_APP_ROOT = os.path.abspath('myBookList_app')
 
 LOGIN_REDIRECT_URL = 'index'
 
 LOGIN_URL = 'Registration login'
 
-USERS_DATAS = "myBookList_app/users-datas/"
+STATIC_ROOT = os.path.join(MYBOOKLIST_APP_ROOT, 'static')
+STATIC_URL = '/static/'
 
-FRONT_PAGE_BOOK_COVER = USERS_DATAS + "front-page-book-cover/"
+MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media')
+MEDIA_URL = '/media/'
+
+
+

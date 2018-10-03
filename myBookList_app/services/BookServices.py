@@ -1,5 +1,5 @@
 # https://docs.djangoproject.com/fr/2.0/topics/http/file-uploads/
-from myBookList.settings import FRONT_PAGE_BOOK_COVER
+
 from uuid import uuid4
 
 
@@ -28,7 +28,7 @@ def generate_path_for_save(instance, filename):
         # uuid4 génère un nombre aléatoire
         new_filename = '{}-{}'.format(uuid4().hex, filename)
 
-    return FRONT_PAGE_BOOK_COVER + new_filename
+    return new_filename
 
 
 def build_post(request):
@@ -53,3 +53,4 @@ def build_post(request):
     post['author'] = author.id
 
     return post
+

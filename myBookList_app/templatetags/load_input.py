@@ -1,4 +1,5 @@
 from django import template
+from django.template import Library
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 
@@ -6,7 +7,12 @@ from django.utils.safestring import mark_safe
 doc = https://docs.djangoproject.com/fr/2.0/howto/custom-template-tags/
 """
 
-register = template.Library()
+register: Library = template.Library()
+
+
+@register.filter
+def addstr(str1, str2):
+    return str(str1) + str(str2)
 
 
 @register.simple_tag()

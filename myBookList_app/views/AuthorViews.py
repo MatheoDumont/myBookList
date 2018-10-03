@@ -3,7 +3,7 @@ from django.views import View
 from django.http import JsonResponse
 
 from myBookList_app.forms.AuthorForms import AuthorForm
-from myBookList_app.services.ApiServices import search_author
+from myBookList_app.services.AuthorServices import search_author
 
 
 class Create(View):
